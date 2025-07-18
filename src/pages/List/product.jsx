@@ -23,10 +23,10 @@ function createProduct(id) {
 
 const columns = [
   { dataKey: 'image', label: 'Image', numeric: false, width: 100 },
-  { dataKey: 'id', label: 'Product ID', numeric: false, width: 100 },
-  { dataKey: 'name', label: 'Name', numeric: false, width: 150 },
-  { dataKey: 'price', label: 'Price ($)', numeric: true, width: 100 },
-  { dataKey: 'category', label: 'Category', numeric: false, width: 120 },
+  { dataKey: 'id', label: 'ID', numeric: false, width: 10 },
+  { dataKey: 'name', label: 'Name', numeric: false, width: 50 },
+  { dataKey: 'price', label: 'Price ($)', numeric: true, width: 80 },
+  { dataKey: 'category', label: 'Category', numeric: false, width: 100 },
   { dataKey: 'inStock', label: 'Stock', numeric: false, width: 100 },
 ];
 
@@ -51,8 +51,8 @@ function rowContent(_index, row) {
               alt={row.name}
               loading="lazy"
               style={{
-                width: 40,
-                height: 40,
+                width:  40,
+                height: 40 ,
                 borderRadius: '6px',
                 objectFit: 'cover',
                 transition: 'transform 0.2s ease-in-out',
@@ -107,7 +107,7 @@ function fixedHeaderContent() {
           align={col.numeric ? 'right' : 'left'}
           sx={{
             width: col.width,
-            fontWeight: 'bold',
+            fontWeght: 'bold',
             fontSize: '0.9rem',
             backgroundColor: '#f5f5f5',
             color: '#333',
@@ -122,9 +122,9 @@ function fixedHeaderContent() {
 
 export default function Product() {
   return (
-    <div className="p-4 rounded-xl h-full duration-300 w-full overflow-x-auto">
-      <h1 className="text-2xl font-semibold mb-4 text-gray-800">Product Table</h1>
-      <Paper sx={{ width: '100%', height: { xs: 600, md: '100%' }, overflow: 'hidden', borderRadius: 2 }}>
+    <div className=" p-4 rounded-xl h-full duration-300 w-full overflow-x-auto">
+      <h1 className="text-3xl p-4 font-semibold  text-center text-blue-900">Product </h1>
+      <Paper sx={{ width:'100%', height: { xs: '100%', md: '100%' }, overflow: 'hidden', borderRadius: 2 }}>
         <TableVirtuoso
           data={rows}
           components={VirtComponents}

@@ -38,7 +38,7 @@ export default function Dashboard() {
         </div>
 
         {/* Product Analytics Table */}
-        <div className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6 overflow-x-auto">
+        <div className=" w-[100vh] bg-white rounded-xl h-[100%] shadow-md hover:shadow-lg transition duration-300 p-6 overflow-x-auto">
           <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">
             Product Analytics
           </h2>
