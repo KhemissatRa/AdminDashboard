@@ -6,41 +6,46 @@ import Progres from '../../components/progressCmp';
 
 export default function Dashboard() {
   return (
-    <div className="dashboard flex flex-col min-h-full bg-gray-100 px-6 py-8">
+    <div className="dashboard min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
       {/* Widgets Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
         <Widgets type="user" />
         <Widgets type="orders" />
         <Widgets type="earnings" />
         <Widgets type="products" />
       </div>
 
-      {/* Progress and Analytics Section */}
-      <div className="flex flex-col items-center min-h-full space-y-10">
-        
+      {/* Progress + Chart + Product Section */}
+      <div className="flex flex-col gap-10">
+
         {/* Progress Circle */}
-        <div className=" max-w-full bg-white rounded-xl  duration-300 ">
-          <Progres />
+        <div className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Order Fulfillment</h2>
+          <div className="flex justify-center">
+            <Progres />
+          </div>
         </div>
-        
+
         {/* Sales Analytics Chart */}
-        <div className="w-full max-w-5xl bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6">
+        <div className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6">
           <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
             Sales Analytics
           </h2>
-          <div style={{ width: '100%', height: 400 }}>
+          <div className="w-full h-[400px]">
             <Chart />
           </div>
         </div>
-        <div className=" w-5xl h-[640px] p-4 bg-white   rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300  "
-        >       {/* Product Analytics Table */}
-         <h2 className="text-2xl font-semibold text-center text-gray-700 ">
+
+        {/* Product Analytics Table */}
+        <div className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6 overflow-x-auto">
+          <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">
             Product Analytics
           </h2>
           <Product />
         </div>
-</div>      
+
+      </div>
     </div>
   );
 }

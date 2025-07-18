@@ -1,33 +1,27 @@
-import React from 'react'
-import Navbar from './navbar'
-import Sidebar from './sidebar'
+// Home.jsx
+import React from 'react';
+import Navbar from './navbar';
+import Sidebar from './sidebar';
 import { Outlet } from 'react-router-dom';
-import Dashboard from '../List/Dashboard';
 
-function home() {
+export default function Home() {
   return (
+    <div className="flex min-h-screen bg-gray-100">
+      {/* Sidebar */}
+      <Sidebar />
 
-    
-<div className='flex flex-row border-2 border-black rounded-xl  max-w-screen min-h-full bg-white'> 
-    <div className='  w-1/7  bg-black shadow-md hover:shadow-lg transition-shadow duration-300à'>
-     <Sidebar/> 
+      {/* Main content */}
+      <div className="flex-1 flex flex-col">
+        {/* Navbar */}
+        <div className="w-full bg-white shadow-sm border-b border-gray-200">
+          <Navbar />
+        </div>
+
+        {/* Page content */}
+        <main className="flex-1 p-4 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
-    <div className='   w-6/7 rounded-xl'>
-      <Navbar/>
-      <main className=' p-2 bg-white rounded-xl'>
-      <Outlet/>
-      </main>
-      
-     
-   
-
-              
-</div>
-
-  
-</div>
-
-  )
+  );
 }
-
-export default home

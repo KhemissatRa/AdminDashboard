@@ -17,7 +17,7 @@ function createProduct(id) {
     category: chance.pickone(['Electronics', 'Books', 'Clothing', 'Home', 'Beauty']),
     inStock: chance.bool(),
     supplier: chance.company(),
-    image: `../public/product.jpg`, // Updated with dynamic placeholder
+    image: `product.jpg`,
   };
 }
 
@@ -37,11 +37,12 @@ function rowContent(_index, row) {
         <TableCell
           key={col.dataKey}
           align={col.numeric ? 'right' : 'left'}
-          style={{
+          sx={{
             padding: '12px',
             verticalAlign: 'middle',
             whiteSpace: 'nowrap',
             backgroundColor: '#fff',
+            fontSize: { xs: '0.75rem', sm: '0.875rem' },
           }}
         >
           {col.dataKey === 'image' ? (
@@ -56,8 +57,8 @@ function rowContent(_index, row) {
                 objectFit: 'cover',
                 transition: 'transform 0.2s ease-in-out',
               }}
-              onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.1)')}
-              onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
+              onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
             />
           ) : col.dataKey === 'inStock' ? (
             <span
@@ -72,10 +73,10 @@ function rowContent(_index, row) {
             >
               {row.inStock ? 'Available' : 'Out of Stock'}
             </span>
+          ) : col.numeric ? (
+            `$${row[col.dataKey].toFixed(2)}`
           ) : (
-            col.numeric
-              ? `$${row[col.dataKey].toFixed(2)}`
-              : row[col.dataKey]
+            row[col.dataKey]
           )}
         </TableCell>
       ))}
@@ -83,7 +84,7 @@ function rowContent(_index, row) {
   );
 }
 
-const rows = Array.from({ length: 100 }, (_, i) => createProduct(i));
+const rows = Array.from({ length: 20 }, (_, i) => createProduct(i));
 
 const VirtComponents = {
   Scroller: React.forwardRef((props, ref) => (
@@ -104,7 +105,7 @@ function fixedHeaderContent() {
         <TableCell
           key={col.dataKey}
           align={col.numeric ? 'right' : 'left'}
-          style={{
+          sx={{
             width: col.width,
             fontWeight: 'bold',
             fontSize: '0.9rem',
@@ -121,9 +122,9 @@ function fixedHeaderContent() {
 
 export default function Product() {
   return (
-    <div className=" p-4 rounded-xl  duration-300 max-w-full h-screen">
-      <h1 className="text-2xl font-semibold mb-4 text-gray-800"></h1>
-      <Paper sx={{ width: '100%', height: '100%', overflow: 'hidden', borderRadius: 2 }}>
+    <div className="p-4 rounded-xl h-full duration-300 w-full overflow-x-auto">
+      <h1 className="text-2xl font-semibold mb-4 text-gray-800">Product Table</h1>
+      <Paper sx={{ width: '100%', height: { xs: 600, md: '100%' }, overflow: 'hidden', borderRadius: 2 }}>
         <TableVirtuoso
           data={rows}
           components={VirtComponents}

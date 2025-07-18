@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import AdUnitsIcon from '@mui/icons-material/AdUnits';
@@ -11,9 +13,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 const menuSections = [
   {
     title: 'Dashboard',
-    items: [
-      { to: '/', label: 'Dashboard', icon: <AnalyticsIcon /> },
-    ],
+    items: [{ to: '/', label: 'Dashboard', icon: <AnalyticsIcon /> }],
   },
   {
     title: 'List',
@@ -35,37 +35,72 @@ const menuSections = [
 
 export default function Sidebar() {
   const location = useLocation();
+  const [open, setOpen] = useState(false);
 
   return (
-    <aside className="bg-white w-64 min-h-full rounded-xl shadow-md hover:shadow-lg p-4 transition-shadow duration-300 space-y-8">
-      {menuSections.map((section, i) => (
-        <div key={i}>
-          <h2 className="text-blue-900 font-bold text-lg border-b-2 border-blue-600 mb-4">
-            {section.title.slice(0, 2)}
-            <span className="text-black">{section.title.slice(2)}</span>
-          </h2>
-          <ul className="space-y-4 text-lg font-medium">
-            {section.items.map((item, idx) => {
-              const isActive = location.pathname === item.to;
-              return (
-                <li key={idx}>
-                  <Link
-                    to={item.to}
-                    className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 ${
-                      isActive
-                        ? 'bg-blue-100 text-blue-800 font-semibold'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    <span className="text-blue-900">{item.icon}</span>
-                    <span>{item.label}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+    <>
+      {/* Toggle Button for Mobile */}
+      <button
+        className="sm:hidden fixed top-4 left-4 z-50 text-blue-700 p-2 rounded-md bg-white shadow-md"
+        onClick={() => setOpen(true)}
+      >
+        <MenuIcon />
+      </button>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 z-40 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 sm:static sm:translate-x-0 ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {/* Close button for mobile */}
+        <div className="flex sm:hidden justify-end p-4">
+          <button onClick={() => setOpen(false)} className="text-gray-700">
+            <CloseIcon />
+          </button>
         </div>
-      ))}
-    </aside>
+
+        <nav className="space-y-8 p-5">
+          {menuSections.map((section, index) => (
+            <div key={index}>
+              <h2 className="text-blue-900 font-bold text-lg border-b border-blue-600 mb-4 pb-1">
+                {section.title.slice(0, 2)}
+                <span className="text-black">{section.title.slice(2)}</span>
+              </h2>
+              <ul className="space-y-2">
+                {section.items.map((item, idx) => {
+                  const isActive = location.pathname === item.to;
+                  return (
+                    <li key={idx}>
+                      <Link
+                        to={item.to}
+                        onClick={() => setOpen(false)} // Close sidebar on nav
+                        className={`flex items-center gap-3 px-4 py-2 rounded-md transition-colors duration-200 ${
+                          isActive
+                            ? 'bg-blue-100 text-blue-800 font-semibold'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        <span className="text-blue-800">{item.icon}</span>
+                        <span className="truncate">{item.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </div>
+
+      {/* Overlay (only on mobile when sidebar is open) */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black opacity-30 z-30 sm:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+    </>
   );
 }
+
