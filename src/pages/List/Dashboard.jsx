@@ -6,7 +6,7 @@ import Progres from '../../components/progressCmp';
 
 export default function Dashboard() {
   return (
-    <div className="dashboard min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div className="dashboard min-h-full max-w-full bg-gray-100 px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
       {/* Widgets Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -28,7 +28,7 @@ export default function Dashboard() {
         </div>
 
         {/* Sales Analytics Chart */}
-        <div className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6">
+        <div className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-2">
           <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
             Sales Analytics
           </h2>
@@ -38,10 +38,8 @@ export default function Dashboard() {
         </div>
 
         {/* Product Analytics Table */}
-        <div className=" w-[100vh] bg-white rounded-xl h-[100%] shadow-md hover:shadow-lg transition duration-300 p-6 overflow-x-auto">
-          <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">
-            Product Analytics
-          </h2>
+        <div className=" max-h-screen h-[1400px] bg-white rounded-xl  shadow-md hover:shadow-lg transition duration-300 p-6 ">
+          
           <Product />
         </div>
 

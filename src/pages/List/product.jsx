@@ -22,7 +22,7 @@ function createProduct(id) {
 }
 
 const columns = [
-  { dataKey: 'image', label: 'Image', numeric: false, width: 100 },
+  { dataKey: 'image', label: 'Image', numeric: false, width: 80 },
   { dataKey: 'id', label: 'ID', numeric: false, width: 10 },
   { dataKey: 'name', label: 'Name', numeric: false, width: 50 },
   { dataKey: 'price', label: 'Price ($)', numeric: true, width: 80 },
